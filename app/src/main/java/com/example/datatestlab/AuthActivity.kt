@@ -25,10 +25,10 @@ class AuthActivity : AppCompatActivity() {
     }
     private fun initComponents(){
         firebaseAuth = Firebase.auth
-        etEmail = findViewById<EditText>(R.id.etEmail)
-        etPassword = findViewById<EditText>(R.id.etPassword)
-        btnSignIn = findViewById<Button>(R.id.btnSignIn)
-        btnSignUp = findViewById<Button>(R.id.btnSignUp)
+        etEmail = findViewById(R.id.etEmail)
+        etPassword = findViewById(R.id.etPassword)
+        btnSignIn = findViewById(R.id.btnSignIn)
+        btnSignUp = findViewById(R.id.btnSignUp)
         emailPattern = "^\\w+@[a-zA-Z]+\\.[a-zA-Z]{2,6}$"
         regex = Regex(emailPattern)
     }
