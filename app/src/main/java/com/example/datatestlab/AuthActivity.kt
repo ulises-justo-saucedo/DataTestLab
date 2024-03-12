@@ -1,5 +1,6 @@
 package com.example.datatestlab
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -30,19 +31,20 @@ class AuthActivity : AppCompatActivity() {
         etPassword = findViewById<EditText>(R.id.etPassword)
         btnSignIn = findViewById<Button>(R.id.btnSignIn)
         btnSignUp = findViewById<Button>(R.id.btnSignUp)
-        emailPattern = ".+@(gmail|outlook|hotmail)\\.com"
+        emailPattern = "^\\w+@[a-zA-Z]+\\.[a-zA-Z]{2,6}$"
         regex = Regex(emailPattern)
         alert = AlertDialog.Builder(this)
     }
     private fun initListeners(){
-        val email = etEmail.text.toString()
-        val password = etPassword.text.toString()
         btnSignIn.setOnClickListener {
+            val email = etEmail.text.toString()
+            val password = etPassword.text.toString()
             if(regex.matches(email) && password.isNotEmpty()){
                 firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                     signIn ->
                     if(signIn.isSuccessful){
-                        //Launch another activity.
+                        startActivity(Intent(this, HomeActivity::class.java))
+                        showAlert("Successfully SignIn","Welcome, user!")
                     }else{
                         showAlert("Couldn't sign in!","Invalid email or password. Maybe not registered?")
                     }
@@ -50,6 +52,8 @@ class AuthActivity : AppCompatActivity() {
             }
         }
         btnSignUp.setOnClickListener {
+            val email = etEmail.text.toString()
+            val password = etPassword.text.toString()
             if(regex.matches(email) && password.isNotEmpty()){
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                     signUp ->
