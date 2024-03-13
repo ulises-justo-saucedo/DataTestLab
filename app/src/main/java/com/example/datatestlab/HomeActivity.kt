@@ -1,8 +1,8 @@
 package com.example.datatestlab
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +23,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseStore: FirebaseFirestore
     private lateinit var btnSignOut: Button
+    private lateinit var btnWrite: Button
     private lateinit var rvRegisters: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,16 +33,25 @@ class HomeActivity : AppCompatActivity() {
         initListeners()
         initRecyclerView()
     }
+
+    override fun onResume() {
+        super.onResume()
+        initRecyclerView()
+    }
     private fun initComponents(){
         firebaseAuth = Firebase.auth
         firebaseStore = Firebase.firestore
         btnSignOut = findViewById(R.id.btnSignOut)
+        btnWrite = findViewById(R.id.btnWrite)
         rvRegisters = findViewById(R.id.rvRegisters)
     }
     private fun initListeners(){
         btnSignOut.setOnClickListener {
             firebaseAuth.signOut()
             finish()
+        }
+        btnWrite.setOnClickListener {
+            startActivity(Intent(this, WriteActivity::class.java))
         }
     }
     private fun initRecyclerView(){
@@ -61,7 +71,6 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        Log.i("FIRESTORE", animals.toString())
         return animals
     }
 }

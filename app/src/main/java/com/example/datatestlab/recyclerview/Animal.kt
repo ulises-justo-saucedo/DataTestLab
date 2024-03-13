@@ -3,7 +3,7 @@ package com.example.datatestlab.recyclerview
 data class Animal(
     val name: String,
     val type: String,
-    val age: Int
+    val age: String
 ){
-    constructor() : this("foo", "foo", -1)
+    constructor() : this("foo", "foo", "-1")
 }
