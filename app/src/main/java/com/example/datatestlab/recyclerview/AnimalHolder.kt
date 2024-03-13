@@ -11,9 +11,8 @@ class AnimalHolder(view: View) : RecyclerView.ViewHolder(view) {
     var tvType = view.findViewById<TextView>(R.id.tvType)
     var tvAge = view.findViewById<TextView>(R.id.tvAge)
     fun render(animal: Animal){
-        tvName.setText(animal.name)
-        tvType.setText(animal.type)
-        tvAge.setText(animal.age)
+        tvName.text = "NAME: "+animal.name
+        tvType.text = "TYPE: "+animal.type
+        tvAge.text = "AGE: "+animal.age.toString()
     }
-
 }
