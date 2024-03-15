@@ -31,7 +31,6 @@ class HomeActivity : AppCompatActivity() {
         Alert.show("Successfully sign in!","Welcome, user!",this)
         initComponents()
         initListeners()
-        initRecyclerView()
     }
 
     override fun onResume() {
